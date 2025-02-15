@@ -42,10 +42,11 @@ namespace HanoiTower.Source.DataStructures
 
             Node temp = top;
             top = top.next;
+            height--;
             return temp;
         }
 
-        public int Peek() { return top.data; }
+        public Node Peek() { return top; }
 
         public void PrintStack()
         {
@@ -57,6 +58,8 @@ namespace HanoiTower.Source.DataStructures
             }
         }
 
-        bool IsEmpty() { return top == null;  }
+        public int GetHeight() { return height; }
+
+        public bool IsEmpty() { return top == null;  }
     }
 }
