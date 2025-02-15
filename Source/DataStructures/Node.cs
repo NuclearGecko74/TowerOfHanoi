@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HanoiTower
+namespace HanoiTower.Source.DataStructures
 {
     class Node
     {
@@ -14,7 +14,7 @@ namespace HanoiTower
         public Node(int data)
         {
             this.data = data;
-            this.next = null;
+            next = null;
         }
 
         public Node(int data, Node next)
