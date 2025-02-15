@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Raylib_cs;
 
-namespace HanoiTower.Source.Renderer
+namespace HanoiTower.Source.Game
 {
     class Game
     {
-        private const short WIDTH = 800;
-        private const short HEIGHT = 600;
+        private const short WIDTH = 1080;
+        private const short HEIGHT = 720;
 
         public Game()
         {
