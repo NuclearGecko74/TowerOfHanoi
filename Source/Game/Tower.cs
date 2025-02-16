@@ -14,6 +14,16 @@ namespace HanoiTower.Source.Game
     {
         private Pila disks;
 
+        private Color[] diskColors = new Color[]
+        {
+            Color.Red,
+            Color.Orange,
+            Color.Yellow,
+            Color.Green,
+            Color.Blue,
+            Color.Purple
+        };
+
         public Tower(int n)
         {
             disks = new Pila();
@@ -46,20 +56,23 @@ namespace HanoiTower.Source.Game
         public void DrawTower(Vector2 pos)
         {
             Raylib.DrawRectangle((int)pos.X, (int)pos.Y, 200, 10, Color.Black);
-            Raylib.DrawRectangle((int)pos.X + 100, (int)pos.Y - 300, 5, 300, Color.Black);
+            Raylib.DrawRectangle((int)pos.X + 95, (int)pos.Y - 250, 5, 250, Color.Black);
 
             if (!disks.IsEmpty())
             {
                 for (int i = 1; i <= disks.GetHeight(); i++)
                 {
                     int diskValue = disks.Get(disks.GetHeight() - i).data;
-                    int diskHeight = 10;
-                    int diskWidth = 20 * diskValue;
+                    int diskHeight = 15;
+                    int diskWidth = 30 * diskValue;
 
                     int x = (int)(pos.X + 100 - (diskWidth / 2));
                     int y = (int)(pos.Y - diskHeight * i);
 
-                    Raylib.DrawRectangle(x, y, diskWidth, diskHeight, Color.Lime);
+                    int colorIndex = (diskValue - 1) % diskColors.Length;
+                    Color diskColor = diskColors[colorIndex];
+
+                    Raylib.DrawRectangle(x, y, diskWidth, diskHeight, diskColor);
                 }
             }
         }
