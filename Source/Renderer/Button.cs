@@ -11,6 +11,6 @@ namespace HanoiTower.Source.Renderer
 {
     class Button
     {
-        Vector2 position;
+        private Vector2 position;
     }
 }
