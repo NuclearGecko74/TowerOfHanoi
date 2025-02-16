@@ -13,7 +13,7 @@ namespace HanoiTower.Source.Game
         private const short WIDTH = 1080;
         private const short HEIGHT = 720;
 
-        private const short NUMBER_OF_DISKS = 30;
+        private const short NUMBER_OF_DISKS = 4;
 
         private Tower tower1;
         private Tower tower2;
@@ -60,13 +60,6 @@ namespace HanoiTower.Source.Game
 
             SolveTower(n - 1, t1, t2, t3);
             t1.Move(t3);
-            //Console.WriteLine("Tower 1:");
-            //tower1.PrintTower();
-            //Console.WriteLine("Tower 2:");
-            //tower2.PrintTower();
-            //Console.WriteLine("Tower 3:");
-            //tower3.PrintTower();
-            //Console.ReadKey();
             SolveTower(n - 1, t2, t3, t1);
         }
 

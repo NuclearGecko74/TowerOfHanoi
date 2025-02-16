@@ -48,6 +48,17 @@ namespace HanoiTower.Source.DataStructures
 
         public Node Peek() { return top; }
 
+        public Node Get(int index)
+        {
+            if (IsEmpty() || index < 0 || index >= height) return null;
+            Node current = top;
+            for (int i = 0; i < index; i++)
+            {
+                current = current.next;
+            }
+            return current;
+        }
+
         public void PrintStack()
         {
             Node current = top;

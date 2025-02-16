@@ -47,9 +47,20 @@ namespace HanoiTower.Source.Game
         {
             Raylib.DrawRectangle((int)pos.X, (int)pos.Y, 200, 10, Color.Black);
             Raylib.DrawRectangle((int)pos.X + 100, (int)pos.Y - 300, 5, 300, Color.Black);
+
             if (!disks.IsEmpty())
             {
-                for(int i)
+                for (int i = 1; i <= disks.GetHeight(); i++)
+                {
+                    int diskValue = disks.Get(disks.GetHeight() - i).data;
+                    int diskHeight = 10;
+                    int diskWidth = 20 * diskValue;
+
+                    int x = (int)(pos.X + 100 - (diskWidth / 2));
+                    int y = (int)(pos.Y - diskHeight * i);
+
+                    Raylib.DrawRectangle(x, y, diskWidth, diskHeight, Color.Lime);
+                }
             }
         }
 

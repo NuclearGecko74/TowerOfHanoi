@@ -1,4 +1,5 @@
-﻿using HanoiTower.Source.Game;
+﻿using HanoiTower.Source.DataStructures;
+using HanoiTower.Source.Game;
 
 class Program
 {
