@@ -13,7 +13,7 @@ namespace HanoiTower.Source.Game
         private const short WIDTH = 1080;
         private const short HEIGHT = 720;
 
-        private const short NUMBER_OF_DISKS = 6;
+        private short NUMBER_OF_DISKS = 4;
 
         private Tower tower1;
         private Tower tower2;
@@ -21,17 +21,21 @@ namespace HanoiTower.Source.Game
 
         private List<(Tower from, Tower to)> moves;
 
-        private float timer;
-        private float moveInterval = 0.5f;
+        private double timer;
+        private double moveInterval;
 
-        public Game()
+        public Game(short ndisks)
         {
+            NUMBER_OF_DISKS = ndisks;
+
+            Raylib.InitWindow(WIDTH, HEIGHT, "Torres de Hanoi");
+            Raylib.SetTargetFPS(60);
+
             tower1 = new Tower(NUMBER_OF_DISKS);
             tower2 = new Tower();
             tower3 = new Tower();
 
-            Raylib.InitWindow(WIDTH, HEIGHT, "Torres de Hanoi");
-            Raylib.SetTargetFPS(60);
+            moveInterval = 10 / (Math.Pow(2, NUMBER_OF_DISKS) - 1);
 
             moves = new List<(Tower from, Tower to)>();
 
@@ -61,6 +65,7 @@ namespace HanoiTower.Source.Game
             //    SolveTower(NUMBER_OF_DISKS, tower1, tower3, tower2);
             //}
             //Console.WriteLine("\nTORRE RESUELTA!");
+
             timer += Raylib.GetFrameTime();
 
             if (moves.Count > 0 && timer >= moveInterval)
@@ -69,7 +74,7 @@ namespace HanoiTower.Source.Game
                 nextMove.from.Move(nextMove.to);
                 moves.RemoveAt(0);
 
-                timer = 0f;
+                timer = 0;
             }
         }
 

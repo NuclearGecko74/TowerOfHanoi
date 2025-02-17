@@ -1,11 +1,12 @@
-﻿using HanoiTower.Source.DataStructures;
-using HanoiTower.Source.Game;
+﻿using HanoiTower.Source.Game;
 
 class Program
 {
     static void Main()
     {
-        Game game = new Game();
+        Console.WriteLine("Seleccione la cantidad de discos: ");
+        short numberOfDisks = Convert.ToInt16(Console.ReadLine());
+        Game game = new Game(numberOfDisks);
         game.Start();
     }
 }
