@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using HanoiTower.Source.Renderer;
 using Raylib_cs;
 
 namespace HanoiTower.Source.Game
@@ -24,7 +25,8 @@ namespace HanoiTower.Source.Game
         private double timer;
         private double moveInterval;
 
-        private UInt128 movesCount;
+        private UInt128 movesCount = 0;
+        private bool bSolve = false;
 
         public Game(short ndisks)
         {
@@ -70,7 +72,7 @@ namespace HanoiTower.Source.Game
 
             timer += Raylib.GetFrameTime();
 
-            if (moves.Count > 0 && timer >= moveInterval)
+            if (moves.Count > 0 && timer >= moveInterval && bSolve)
             {
                 var nextMove = moves[0];
                 nextMove.from.Move(nextMove.to);
@@ -80,6 +82,10 @@ namespace HanoiTower.Source.Game
             }
 
             DrawMoves();
+            if (!bSolve)
+            {
+                DrawSolveButton();
+            }
         }
 
         private void SolveTower(int n, Tower origin, Tower destination, Tower auxiliary)
@@ -96,7 +102,17 @@ namespace HanoiTower.Source.Game
             Raylib.DrawText("Movimientos: " + movesCount, 10, 10, 20, Color.Black);
         }
 
-        static public short GetWidth() { return WIDTH; }
-        static public short GetHeight() { return HEIGHT; }
+        private void DrawSolveButton()
+        {
+            Button button = new Button(970, 10, 100, 50, "Solve", Color.Green, Color.DarkGreen, Color.White, 20);
+            button.Draw();
+            if (button.IsClicked())
+            {
+                bSolve = true;
+            }
+        }
+
+        /*static public short GetWidth() { return WIDTH; }
+        static public short GetHeight() { return HEIGHT; }*/
     }
 }
