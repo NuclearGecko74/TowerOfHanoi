@@ -86,6 +86,12 @@ namespace HanoiTower.Source.Game
             {
                 DrawSolveButton();
             }
+
+            if (tower3.GetDisks().GetHeight() == NUMBER_OF_DISKS)
+            {
+                Raylib.DrawText("¡TORRE RESUELTA!", 400, 10, 20, Color.Black);
+                DrawRestartButton();
+            }
         }
 
         private void SolveTower(int n, Tower origin, Tower destination, Tower auxiliary)
@@ -109,6 +115,23 @@ namespace HanoiTower.Source.Game
             if (button.IsClicked())
             {
                 bSolve = true;
+            }
+        }
+
+        private void DrawRestartButton()
+        {
+            Button button = new Button(970, 10, 100, 50, "Restart", Color.Red, Color.Brown, Color.White, 20);
+            button.Draw();
+            if (button.IsClicked())
+            {
+                tower1 = new Tower(NUMBER_OF_DISKS);
+                tower2 = new Tower();
+                tower3 = new Tower();
+                moves = new List<(Tower from, Tower to)>();
+                SolveTower(NUMBER_OF_DISKS, tower1, tower3, tower2);
+                movesCount = 0;
+                timer = 0;
+                bSolve = false;
             }
         }
 
