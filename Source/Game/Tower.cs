@@ -72,7 +72,8 @@ namespace HanoiTower.Source.Game
                     int colorIndex = (diskValue - 1) % diskColors.Length;
                     Color diskColor = diskColors[colorIndex];
 
-                    Raylib.DrawRectangle(x, y, diskWidth, diskHeight, diskColor);
+                    Raylib.DrawRectangleRounded(new Rectangle(x, y, diskWidth, diskHeight), 0.7f, 10, diskColor);
+                    //Raylib.DrawRectangle(x, y, diskWidth, diskHeight, diskColor);
                 }
             }
         }

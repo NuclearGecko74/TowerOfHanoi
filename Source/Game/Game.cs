@@ -24,6 +24,8 @@ namespace HanoiTower.Source.Game
         private double timer;
         private double moveInterval;
 
+        private UInt128 movesCount;
+
         public Game(short ndisks)
         {
             NUMBER_OF_DISKS = ndisks;
@@ -73,9 +75,11 @@ namespace HanoiTower.Source.Game
                 var nextMove = moves[0];
                 nextMove.from.Move(nextMove.to);
                 moves.RemoveAt(0);
-
+                movesCount++;
                 timer = 0;
             }
+
+            DrawMoves();
         }
 
         private void SolveTower(int n, Tower origin, Tower destination, Tower auxiliary)
@@ -85,6 +89,11 @@ namespace HanoiTower.Source.Game
             SolveTower(n - 1, origin, auxiliary, destination);
             moves.Add((origin, destination));
             SolveTower(n - 1, auxiliary, destination, origin);
+        }
+
+        private void DrawMoves()
+        {
+            Raylib.DrawText("Movimientos: " + movesCount, 10, 10, 20, Color.Black);
         }
 
         static public short GetWidth() { return WIDTH; }
