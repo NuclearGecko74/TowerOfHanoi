@@ -78,11 +78,6 @@ namespace HanoiTower.Source.Game
             }
         }
 
-        public void PrintTower()
-        {
-            disks.PrintStack();
-        }
-
         public Pila GetDisks() { return disks; }
     }
 }

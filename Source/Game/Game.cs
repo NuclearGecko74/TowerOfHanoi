@@ -28,9 +28,10 @@ namespace HanoiTower.Source.Game
         private UInt128 movesCount = 0;
         private bool bSolve = false;
 
-        public Game(short ndisks)
+        public Game()
         {
-            NUMBER_OF_DISKS = ndisks;
+            Console.WriteLine("Seleccione la cantidad de discos: ");
+            NUMBER_OF_DISKS = Convert.ToInt16(Console.ReadLine());
 
             Raylib.InitWindow(WIDTH, HEIGHT, "Torres de Hanoi");
             Raylib.SetTargetFPS(60);
@@ -40,13 +41,12 @@ namespace HanoiTower.Source.Game
             tower3 = new Tower();
 
             moveInterval = 10 / (Math.Pow(2, NUMBER_OF_DISKS) - 1);
-
             moves = new List<(Tower from, Tower to)>();
 
-            SolveTower(NUMBER_OF_DISKS, tower1, tower3, tower2);
+            GenerateMoves(NUMBER_OF_DISKS, tower1, tower3, tower2);
         }
 
-        public void Start()
+        public void Run()
         {
             while (!Raylib.WindowShouldClose())
             {
@@ -60,18 +60,24 @@ namespace HanoiTower.Source.Game
         private void Update()
         {
             Raylib.ClearBackground(Color.SkyBlue);
-            
-            tower1.DrawTower(new Vector2(100, 620));
-            tower2.DrawTower(new Vector2(410, 620));
-            tower3.DrawTower(new Vector2(720, 620));
-            //while (tower3.GetDisks().GetHeight() < NUMBER_OF_DISKS)
-            //{
-            //    SolveTower(NUMBER_OF_DISKS, tower1, tower3, tower2);
-            //}
-            //Console.WriteLine("\nTORRE RESUELTA!");
 
+            DrawTowers();
+            DrawUI();
+            SolveTower();
+        }
+
+        private void GenerateMoves(int n, Tower origin, Tower destination, Tower auxiliary)
+        {
+            if (n == 0) return;
+
+            GenerateMoves(n - 1, origin, auxiliary, destination);
+            moves.Add((origin, destination));
+            GenerateMoves(n - 1, auxiliary, destination, origin);
+        }
+
+        private void SolveTower()
+        {
             timer += Raylib.GetFrameTime();
-
             if (moves.Count > 0 && timer >= moveInterval && bSolve)
             {
                 var nextMove = moves[0];
@@ -80,27 +86,6 @@ namespace HanoiTower.Source.Game
                 movesCount++;
                 timer = 0;
             }
-
-            DrawMoves();
-            if (!bSolve)
-            {
-                DrawSolveButton();
-            }
-
-            if (tower3.GetDisks().GetHeight() == NUMBER_OF_DISKS)
-            {
-                Raylib.DrawText("¡TORRE RESUELTA!", 400, 10, 20, Color.Black);
-                DrawRestartButton();
-            }
-        }
-
-        private void SolveTower(int n, Tower origin, Tower destination, Tower auxiliary)
-        {
-            if (n == 0) return;
-
-            SolveTower(n - 1, origin, auxiliary, destination);
-            moves.Add((origin, destination));
-            SolveTower(n - 1, auxiliary, destination, origin);
         }
 
         private void DrawMoves()
@@ -128,14 +113,33 @@ namespace HanoiTower.Source.Game
                 tower2 = new Tower();
                 tower3 = new Tower();
                 moves = new List<(Tower from, Tower to)>();
-                SolveTower(NUMBER_OF_DISKS, tower1, tower3, tower2);
+                GenerateMoves(NUMBER_OF_DISKS, tower1, tower3, tower2);
                 movesCount = 0;
                 timer = 0;
                 bSolve = false;
             }
         }
 
-        /*static public short GetWidth() { return WIDTH; }
-        static public short GetHeight() { return HEIGHT; }*/
+        private void DrawTowers()
+        {
+            tower1.DrawTower(new Vector2(100, 620));
+            tower2.DrawTower(new Vector2(410, 620));
+            tower3.DrawTower(new Vector2(720, 620));
+        }
+
+        private void DrawUI()
+        {
+            DrawMoves();
+            if (!bSolve)
+            {
+                DrawSolveButton();
+            }
+
+            if (tower3.GetDisks().GetHeight() == NUMBER_OF_DISKS)
+            {
+                Raylib.DrawText("¡TORRE RESUELTA!", 400, 10, 20, Color.Black);
+                DrawRestartButton();
+            }
+        }
     }
 }
