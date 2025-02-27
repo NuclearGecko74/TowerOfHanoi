@@ -22,5 +22,17 @@ namespace HanoiTower.Source.DataStructures
             this.data = data;
             this.next = next;
         }
+
+        public int Data
+        {
+            get { return this.data; }
+            set { this.data = value; }
+        }
+
+        public Node Next
+        {
+            get { return this.next; }
+            set { this.next = value; }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace HanoiTower.Source.Game
         private Tower tower2;
         private Tower tower3;
 
+        // Lista donde se guardan los movimientos a realizar para resolver la torre
         private List<(Tower from, Tower to)> moves;
 
         private double timer;
@@ -30,16 +31,19 @@ namespace HanoiTower.Source.Game
 
         public Game()
         {
+            // Pedir la cantidad de discos
             Console.WriteLine("Seleccione la cantidad de discos: ");
             NUMBER_OF_DISKS = Convert.ToInt16(Console.ReadLine());
 
             Raylib.InitWindow(WIDTH, HEIGHT, "Torres de Hanoi");
             Raylib.SetTargetFPS(60);
 
+            // Crear Torres
             tower1 = new Tower(NUMBER_OF_DISKS);
             tower2 = new Tower();
             tower3 = new Tower();
 
+            // Calcular el tiempo entre cada movimiento dependiendo del número de discos
             moveInterval = 10 / (Math.Pow(2, NUMBER_OF_DISKS) - 1);
             moves = new List<(Tower from, Tower to)>();
 
@@ -66,6 +70,7 @@ namespace HanoiTower.Source.Game
             SolveTower();
         }
 
+        // Generamos los movimiento usando recursividad y los guardamos en una lista.
         private void GenerateMoves(int n, Tower origin, Tower destination, Tower auxiliary)
         {
             if (n == 0) return;
@@ -77,7 +82,12 @@ namespace HanoiTower.Source.Game
 
         private void SolveTower()
         {
+            // Sumar el tiempo en segundos entre cada frame
             timer += Raylib.GetFrameTime();
+
+            /* Si superamos cierto tiempo se hace el siguiente movimiento para resolver la torre de tal manera
+            que se puedan ver todos los movimientos realizados
+            */
             if (moves.Count > 0 && timer >= moveInterval && bSolve)
             {
                 var nextMove = moves[0];

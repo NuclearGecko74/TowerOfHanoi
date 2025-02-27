@@ -26,6 +26,7 @@ namespace HanoiTower.Source.Game
 
         public Tower(int n)
         {
+            // Meto los discos empezando del más grande al más pequeño para formar la torre
             disks = new Pila();
             for (int i = n; i > 0; i--)
             {
@@ -55,6 +56,7 @@ namespace HanoiTower.Source.Game
 
         public void DrawTower(Vector2 pos)
         {
+            // Dibujamos la base de cada torre
             Raylib.DrawRectangle((int)pos.X, (int)pos.Y, 200, 10, Color.Black);
             Raylib.DrawRectangle((int)pos.X + 95, (int)pos.Y - 250, 5, 250, Color.Black);
 
@@ -64,7 +66,7 @@ namespace HanoiTower.Source.Game
                 {
                     int diskValue = disks.Get(disks.GetHeight() - i).data;
                     int diskHeight = 15;
-                    int diskWidth = 30 * diskValue;
+                    int diskWidth = 30 * diskValue; // Calculamos el ancho del disco dependiendo del valor que contenga
 
                     int x = (int)(pos.X + 100 - (diskWidth / 2));
                     int y = (int)(pos.Y - diskHeight * i);
