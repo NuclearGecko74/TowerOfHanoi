@@ -20,3 +20,42 @@ El proyecto se compone de varias clases:
 - **Pila.cs**: Implementa la estructura de datos tipo pila para almacenar los discos.
 - **Node.cs**: Define los nodos que componen la pila.
 - **Button.cs**: Implementa botones interactivos para la UI.
+
+## Requisitos
+Para ejecutar este proyecto, necesitas:
+- **.NET SDK** instalado.
+- **Raylib-cs** para la representación gráfica.
+- Un entorno de desarrollo compatible con C# (Visual Studio, JetBrains Rider, VS Code, etc.).
+
+## Instalación
+1. Clona este repositorio:
+   ```sh
+   git clone https://github.com/tu-usuario/torres-de-hanoi-csharp.git
+   ```
+2. Navega hasta el directorio del proyecto:
+   ```sh
+   cd torres-de-hanoi-csharp
+   ```
+3. Compila y ejecuta el proyecto:
+   ```sh
+   dotnet run
+   ```
+
+## Ejemplo de Uso
+```sh
+Seleccione la cantidad de discos: 3
+```
+_(Se abrirá la ventana gráfica con las torres y discos representados visualmente)_
+
+Si se presiona el botón "Solve", se mostrarán los movimientos paso a paso hasta completar el juego.
+
+## Notas
+- La interfaz está implementada con **Raylib**, por lo que es necesario instalar la biblioteca antes de compilar el proyecto.
+- La dificultad del problema crece exponencialmente con el número de discos, por lo que valores muy altos pueden hacer que la solución tarde en completarse.
+
+## Autor
+- **Anton Emir Olguin Cabrales**
+
+## Licencia
+Este proyecto se distribuye bajo la licencia MIT. Puedes usarlo y modificarlo libremente.
+
